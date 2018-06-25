@@ -68,16 +68,16 @@ def introducao():
 			player_cor = 0
 
 		if select == 2:
-			tela.blit(img002b, [int(160 * escala), int(350 * escala)])
+			tela.blit(img002b, [int(185 * escala), int(350 * escala)])
 			player_cor = 1
 
 		if select == 3:
-			tela.blit(img002b, [int(290 * escala), int(350 * escala)])
+			tela.blit(img002b, [int(370 * escala), int(350 * escala)])
 			player_cor = 2
 
-		tela.blit(carro1, [int(30 * escala), int(350 * escala)])
-		tela.blit(carro2, [int(160 * escala), int(350 * escala)])
-		tela.blit(carro3, [int(290 * escala), int(350 * escala)])
+		tela.blit(carro1, [int(40 * escala), int(375 * escala)])
+		tela.blit(carro2, [int(195 * escala), int(375 * escala)])
+		tela.blit(carro3, [int(380 * escala), int(375 * escala)])
 		pygame.display.update()
 
 		for event in pygame.event.get():
