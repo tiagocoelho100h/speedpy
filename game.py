@@ -37,6 +37,7 @@ pista1 = pygame.transform.scale(pygame.image.load('pista1.png'), [int(500 * esca
 img001 = pygame.transform.scale(pygame.image.load('001.png'), [int(500 * escala), int(800 * escala)])
 img002 = pygame.transform.scale(pygame.image.load('002.png'), [int(500 * escala), int(800 * escala)])
 img002b = pygame.transform.scale(pygame.image.load('002b.png'), [int(100 * escala), int(200 * escala)])
+img003 = pygame.transform.scale(pygame.image.load('003.png'), [int(500 * escala), int(800 * escala)])
 
 # Adicionando imagens as variaveis para seleção de veiculos
 obstaculo1 = (carro1, carro2, carro3)
@@ -46,13 +47,12 @@ obstaculo1_cor = 0
 # Game over
 def gameover(pontos):
 	tela.fill([0, 0, 0])
-	font = pygame.font.Font('geo.ttf', int(20 * escala))
-	text = font.render(str('Game Over'), True, [255, 255, 255])
-	text2 = font.render(str(pontos), True, [255, 255, 255])
-	tela.blit(text, [int(70 * escala), int(380 * escala)])
-	tela.blit(text2, [int(70 * escala), int(480 * escala)])
+	tela.blit(img003, [0, 0])
+	font = pygame.font.Font('nasa.ttf', int(20 * escala))
+	text = font.render(str(pontos), True, [255, 255, 255])
+	tela.blit(text, [int(70 * escala), int(480 * escala)])
 	pygame.display.update()
-	pygame.time.wait(5000)
+	pygame.time.wait(10000)
 
 # Introdução do game
 def introducao():
