@@ -1,6 +1,7 @@
 # Importando modulos
 import pygame
 import random
+import os.path
 
 # Iniciando o pygame
 pygame.init()
@@ -44,13 +45,44 @@ obstaculo1 = (carro1, carro2, carro3)
 player = (carro1, carro2, carro3)
 obstaculo1_cor = 0
 
+# Gerando historico de pontuação, Rank
+def rank(score_new):
+	global score_max
+	# Criando o arquivo rank.txt
+	e = os.path.isfile('rank.txt')
+	if e == False:
+		rank = open('rank.txt', 'w')
+		rank.write('1')
+		rank.close()
+
+	# Lendo maior pontuação
+	rank = open('rank.txt', 'r')
+	score_file = rank.read()
+	rank.close()
+
+	# Comparando pontuação
+	score_file = int(score_file)
+	if score_new > score_file:
+		score_max = score_new
+	else:
+		score_max = score_file
+
+	# Escrevendo maior pontuação
+	rank = open('rank.txt', 'w')
+	rank.write(str(score_max))
+	rank.close()
+
 # Game over
 def gameover(pontos):
+	rank(pontos)
+	recorde = score_max
 	tela.fill([0, 0, 0])
 	tela.blit(img003, [0, 0])
-	font = pygame.font.Font('nasa.ttf', int(20 * escala))
+	font = pygame.font.Font('nasa.ttf', int(40 * escala))
 	text = font.render(str(pontos), True, [255, 255, 255])
-	tela.blit(text, [int(70 * escala), int(480 * escala)])
+	text2 = font.render(str(recorde), True, [255, 255, 255])
+	tela.blit(text, [int(160 * escala), int(350 * escala)])
+	tela.blit(text2, [int(160 * escala), int(550 * escala)])
 	pygame.display.update()
 	pygame.time.wait(10000)
 
