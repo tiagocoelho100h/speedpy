@@ -42,8 +42,9 @@ img003 = pygame.transform.scale(pygame.image.load('003.png'), [int(500 * escala)
 
 # Adicionando imagens as variaveis para seleção de veiculos
 obstaculo1 = (carro1, carro2, carro3)
+obstaculo2 = (carro1, carro2, carro3)
 player = (carro1, carro2, carro3)
-obstaculo1_cor = 0
+obstaculo1_cor, obstaculo2_cor = 0, 0
 
 # Gerando historico de pontuação, Rank
 def rank(score_new):
@@ -143,6 +144,7 @@ def pontuacao(pontos):
 # Iniciando variaveis
 player_x, player_y = int(225 * escala), int(600 * escala)
 obstaculo1_x, obstaculo1_y = int(20 * escala), int(-154 * escala)
+obstaculo2_x, obstaculo2_y = int(220 * escala), int(-654 * escala)
 x = 0
 y = 0
 pontos = 0
@@ -183,6 +185,7 @@ while running:
 	# Criando retangulos de colisão
 	player_area = pygame.Rect(player_x, player_y, int(80 * escala), int(150 * escala))
 	obstaculo1_area = pygame.Rect(obstaculo1_x, obstaculo1_y, int(68 * escala), int(145 * escala))
+	obstaculo2_area = pygame.Rect(obstaculo2_x, obstaculo2_y, int(68 * escala), int(145 * escala))
 
 	# Detectando colisão entre carros
 	if player_area.colliderect(obstaculo1_area):
@@ -211,13 +214,21 @@ while running:
 
 	# Desenha carros na tela	
 	tela.blit(obstaculo1[obstaculo1_cor], obstaculo1_area)
+	tela.blit(obstaculo2[obstaculo2_cor], obstaculo2_area)
 	tela.blit(player[player_cor], player_area)
 
+	# Movendo os obstaculos
 	obstaculo1_y += velocidade / 2
 	if obstaculo1_y >= int(800 * escala):
 		obstaculo1_y = int(-154 * escala)
 		obstaculo1_x = random.randint(int(20 * escala), int(400 * escala))
 		obstaculo1_cor = random.randint(0, 2)
+
+	obstaculo2_y += velocidade / 2
+	if obstaculo2_y >= int(800 * escala):
+		obstaculo2_y = int(-654 * escala)
+		obstaculo2_x = random.randint(int(20 * escala), int(400 * escala))
+		obstaculo2_cor = random.randint(0, 2)
 
 	pygame.display.update()
 
