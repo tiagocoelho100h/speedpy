@@ -148,6 +148,7 @@ obstaculo2_x, obstaculo2_y = int(220 * escala), int(-654 * escala)
 x = 0
 y = 0
 pontos = 0
+nivel = 0
 
 # Exibe logo do game
 tela.blit(img001, [0, 0])
@@ -166,6 +167,7 @@ while running:
 	clock = pygame.time.Clock()
 	clock.tick(60)
 	velocidade = int(10 * escala)
+	velocidade = velocidade + nivel
 
 	# Capturando movimentos
 	for event in pygame.event.get():
@@ -181,6 +183,7 @@ while running:
 
 			if event.key == pygame.K_w:
 				velocidade = int(20 * escala)
+				velocidade = int(velocidade * 2)
 
 	# Criando retangulos de colisão
 	player_area = pygame.Rect(player_x, player_y, int(80 * escala), int(150 * escala))
@@ -211,6 +214,7 @@ while running:
 	if y >= int(560 * escala):
 		y = 0
 		pontos += 1
+		nivel = int(pontos / 10)
 
 	# Desenha carros na tela	
 	tela.blit(obstaculo1[obstaculo1_cor], obstaculo1_area)
@@ -218,16 +222,36 @@ while running:
 	tela.blit(player[player_cor], player_area)
 
 	# Movendo os obstaculos
+	lista_posicao_obstaculo = (int(60 * escala), int(200 * escala), int(350 * escala))
+
 	obstaculo1_y += velocidade / 2
 	if obstaculo1_y >= int(800 * escala):
 		obstaculo1_y = int(-154 * escala)
-		obstaculo1_x = random.randint(int(20 * escala), int(400 * escala))
+		sorteia_lista1 = random.randint(0, 2)
+		if sorteia_lista1 == 0:
+			obstaculo1_x = lista_posicao_obstaculo[0]
+		if sorteia_lista1 == 1:
+			obstaculo1_x = lista_posicao_obstaculo[1]
+		if sorteia_lista1 == 2:
+			obstaculo1_x = lista_posicao_obstaculo[2]
+
 		obstaculo1_cor = random.randint(0, 2)
 
 	obstaculo2_y += velocidade / 2
 	if obstaculo2_y >= int(800 * escala):
-		obstaculo2_y = int(-654 * escala)
-		obstaculo2_x = random.randint(int(20 * escala), int(400 * escala))
+		obstaculo2_y = int(-154 * escala)
+		sorteia_lista2 = random.randint(0, 2)
+		if sorteia_lista1 == sorteia_lista2:
+			sorteia_lista2 = 2
+			if sorteia_lista1 == sorteia_lista2:
+				sorteia_lista2 = 1
+		if sorteia_lista2 == 0:
+			obstaculo2_x = lista_posicao_obstaculo[0]
+		if sorteia_lista2 == 1:
+			obstaculo2_x = lista_posicao_obstaculo[1]
+		if sorteia_lista2 == 2:
+			obstaculo2_x = lista_posicao_obstaculo[2]
+
 		obstaculo2_cor = random.randint(0, 2)
 
 	pygame.display.update()
