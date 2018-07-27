@@ -196,6 +196,11 @@ while running:
 		gameover(pontos)
 		running = False
 
+	if player_area.colliderect(obstaculo2_area):
+		print('Game Over!')
+		gameover(pontos)
+		running = False
+
 	# Limitando colisão laterais da tela
 	if player_x <= int(20 * escala):
 		player_x = int(20 * escala)
